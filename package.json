@@ -1,0 +1,23 @@
+{
+  "name": "console-debug",
+  "version": "1.0.0",
+  "description": "Easy to debug mobile devices and PC devices, easy to use",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Haojen/console-debug.git"
+  },
+  "keywords": [
+    "console",
+    "debug"
+  ],
+  "author": "haojen ma",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Haojen/console-debug/issues"
+  },
+  "homepage": "https://github.com/Haojen/console-debug#readme"
+}
