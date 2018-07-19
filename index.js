@@ -1,17 +1,17 @@
 class ConsoleDebug {
     constructor(config={}) {
         const CONFIG = {
-            el: config.el || 'body',
+            el: config.el,
             position: {
-                top: config.position.top || '0',
-                left: config.position.left || '100%',
+                top: config.position && config.position.top || '0',
+                left: config.position && config.position.left || '100%',
             },
             touchTrigger: config.touchTrigger || 3,
             keyboardTrigger: config.keyboardTrigger || '',
-            backgroundColor: config.backgroundColor || 'rgba(0,0,0,.5)',
+            backgroundColor: config.backgroundColor || 'rgba(0,0,0,0.5)',
             size: {
-                height: config.size.height || '100vh', // half
-                width: config.size.width || '100vw'
+                height: config.size && config.size.height || '100vh', // half
+                width: config.size && config.size.width || '100vw'
             }
         }
 
@@ -54,11 +54,15 @@ class ConsoleDebug {
         CloseButton.style.border = '1px solid red'
 
         this.trigger(RootEl)
+
+        const Container = config.el ? document.querySelector(config.el) : document.body
+        Container.appendChild(RootEl)
     }
 
     trigger(element, method) {
         // 多点触控
         if (window.ontouchstart) {
+            // document.body.ontouchend
 
         }
 
@@ -69,3 +73,5 @@ class ConsoleDebug {
     }
 
 }
+
+const ConsoleLog = new ConsoleDebug()
