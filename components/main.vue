@@ -292,6 +292,8 @@
             },
             onClearLogEv() {
                 this.log = ''
+                this.errorNumber = 0
+                this.warningNumber = 0
             },
             onCloseConsolePanelEv(){
                 this.minimize = false
