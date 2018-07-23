@@ -156,7 +156,7 @@
 </template>
 
 <script>
-    module.exports =  {
+    export default {
         name: "consolog",
         props: {
         },
@@ -167,7 +167,8 @@
                 minimize: false,
                 errorNumber: 0,
                 warningNumber: 0,
-                controlPanelDisplayState: true,
+                controlPanelDisplayState: false,
+
                 // temp var
                 counter: 0,
                 temp: null,
