@@ -1,6 +1,6 @@
 {
   "name": "zen-log",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Easy to debug mobile devices and PC devices, easy to use",
   "main": "index.js",
   "scripts": {
