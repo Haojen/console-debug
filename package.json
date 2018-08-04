@@ -4,7 +4,10 @@
   "description": "Easy to debug mobile devices and PC devices, easy to use",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode production",
+    "dev": "webpack --mode development",
+    "start": "webpack-dev-server --mode development --open"
   },
   "repository": {
     "type": "git",
@@ -19,5 +22,16 @@
   "bugs": {
     "url": "https://github.com/Haojen/console-debug/issues"
   },
-  "homepage": "https://github.com/Haojen/console-debug#readme"
+  "homepage": "https://github.com/Haojen/console-debug#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "webpack": "^4.16.4",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.5"
+  },
+  "dependencies": {
+    "preact": "^8.2.9"
+  }
 }
