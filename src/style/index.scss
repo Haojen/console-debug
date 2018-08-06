@@ -3,13 +3,16 @@
 #__ZEN_LOG__ {
   position: fixed;
   left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: red;
+  bottom: 0;
+  width: 50vw;
+  height: 40vh;
+  background-color: #917800;
 
-  .resizer {
-    width: 100%;
+  .x-move {
+    cursor: ew-resize;
+  }
 
+  .y-move {
+    cursor: ns-resize;
   }
 }
