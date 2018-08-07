@@ -21,6 +21,8 @@ const Menubar = styled.header`
 const MenubarItem = styled.nav`
     height: 100%;
     margin: 0 5px;
+    
+    color: ${props => props.isActive ? '#fff' : '#000'};
 `
 
 const MainContainer = styled.section`
@@ -37,12 +39,41 @@ const Statusbar = styled.footer`
 
 
 class Console extends Component {
+    constructor() {
+        super()
+
+        this.state = {
+            menubarId: 'console',
+            menubarArray: [
+                {
+                    id: 'console',
+                    name: 'console',
+                },
+                {
+                    id: 'network',
+                    name: 'network',
+                }
+            ],
+        }
+    }
+    handleMenubarItemClick(menuItemId) {
+        this.setState(Object.assign(this.state, {
+            menubarId: menuItemId
+        }))
+    }
     render() {
         return (
             <Consolebox>
                 <Menubar>
-                    <MenubarItem>Console</MenubarItem>
-                    <MenubarItem>Network</MenubarItem>
+                    {
+                        this.state.menubarArray.map(menuItem => {
+                            return (
+                                <MenubarItem isActive={menuItem.id == this.state.menubarId} onClick={this.handleMenubarItemClick.bind(this, menuItem.id)}>
+                                    {menuItem.name}
+                                </MenubarItem>
+                            )
+                        })
+                    }
                 </Menubar>
                 <MainContainer>
                     456
