@@ -4,15 +4,50 @@
   position: fixed;
   left: 0;
   bottom: 0;
-  width: 50vw;
+  width: 100vw;
   height: 40vh;
+  color: #fff;
   background-color: #917800;
 
-  .x-move {
-    cursor: ew-resize;
+  .zenlog-header-menu {
+    display: flex;
+    justify-content: space-between;
+
+    height: 30px;
+    width: 100%;
+    background-color: darkred;
+
+    .zenlog-features-container {
+      display: flex;
+      height: 100%;
+      align-items: center;
+
+      .feature-item {
+        height: 100%;
+        margin: 0 5px;
+      }
+    }
+
+    .zenlog-window-manage {
+      height: 100%;
+      button {
+        height: 100%;
+        margin: 0 5px;
+      }
+    }
   }
 
-  .y-move {
-    cursor: ns-resize;
+  .zenlog-main-content {
+    background-color: coral;
+  }
+
+  .zenlog-footer-menu {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 26px;
+    background-color: #176fc4;
   }
 }
