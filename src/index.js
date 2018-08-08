@@ -4,10 +4,10 @@ import styled from 'styled-components'
 const Consolebox = styled.div`
     position: fixed;
     left: 0;
-    top: 0;
+    bottom: 0;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 40vh;
     width: 100vw;
     background: red;
 `
@@ -31,6 +31,11 @@ const MainContainer = styled.section`
     background-color: pink;
 `
 
+const MainContainerItem = styled.div`
+    width: 100%;
+    height: 100%;
+`
+
 const Statusbar = styled.footer`
     color: #F51963;
     height: 20px;
@@ -39,49 +44,57 @@ const Statusbar = styled.footer`
 
 
 class Console extends Component {
-    constructor() {
-        super()
+  constructor() {
+    super()
 
-        this.state = {
-            menubarId: 'console',
-            menubarArray: [
-                {
-                    id: 'console',
-                    name: 'console',
-                },
-                {
-                    id: 'network',
-                    name: 'network',
-                }
-            ],
+    this.state = {
+      menubarId: 'console',
+      menubarArray: [
+        {
+          id: 'console',
+          name: 'console',
+        },
+        {
+          id: 'network',
+          name: 'network',
         }
+      ],
     }
-    handleMenubarItemClick(menuItemId) {
-        this.setState(Object.assign(this.state, {
-            menubarId: menuItemId
-        }))
-    }
-    render() {
-        return (
-            <Consolebox>
-                <Menubar>
-                    {
-                        this.state.menubarArray.map(menuItem => {
-                            return (
-                                <MenubarItem isActive={menuItem.id == this.state.menubarId} onClick={this.handleMenubarItemClick.bind(this, menuItem.id)}>
-                                    {menuItem.name}
-                                </MenubarItem>
-                            )
-                        })
-                    }
-                </Menubar>
-                <MainContainer>
-                    456
-                </MainContainer>
-                <Statusbar>123</Statusbar>
-            </Consolebox>
-        )
-    }
+  }
+  handleMenubarItemClick(menuItemId) {
+    this.setState(Object.assign(this.state, {
+      menubarId: menuItemId
+    }))
+  }
+  render() {
+    return (
+      <Consolebox>
+        <Menubar>
+          {
+            this.state.menubarArray.map(menuItem => {
+              return (
+                <MenubarItem isActive={menuItem.id == this.state.menubarId}
+                             onClick={this.handleMenubarItemClick.bind(this, menuItem.id)}>
+                  {menuItem.name}
+                </MenubarItem>
+              )
+            })
+          }
+        </Menubar>
+        <MainContainer>
+          {
+            this.state.menubarArray.map(menuItem => {
+              return (
+                menuItem.id === this.state.menubarId
+                && <MainContainerItem>{menuItem.name}</MainContainerItem>
+              )
+            })
+          }
+        </MainContainer>
+        <Statusbar>123</Statusbar>
+      </Consolebox>
+    )
+  }
 }
 
 
