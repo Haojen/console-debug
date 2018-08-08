@@ -1,5 +1,6 @@
 import {h, render, Component} from 'preact'
 import styled from 'styled-components'
+// import './style/index.scss'
 
 const Consolebox = styled.div`
     position: fixed;
@@ -18,11 +19,11 @@ const Menubar = styled.header`
     width: 100%;
 `
 
-const MenubarItem = styled.nav`
+const MenubarItem = styled.button`
     height: 100%;
     margin: 0 5px;
     
-    color: ${props => props.isActive ? '#fff' : '#000'};
+    color: ${props => props.isActive ? '#000' : '#000'};
 `
 
 const MainContainer = styled.section`
@@ -42,6 +43,41 @@ const Statusbar = styled.footer`
     background-color: black;
 `;
 
+class Log extends Component{
+  constructor() {
+    super()
+  }
+
+  render() {
+    const LogItem = styled.span`
+      color: ${ props => props.type === 'number' ? 'blue':''};
+    `
+    const logArray = this.props.logs
+
+    let logRow = []
+    logArray.map(log => {
+      if (typeof log === 'string') {
+        logRow.push(<LogItem> {log} </LogItem>)
+      }
+
+      else if (typeof log === 'number') {
+        logRow.push(<LogItem type={'number'}> {log} </LogItem>)
+      }
+
+      else if (typeof log === 'object') {
+        logRow.push(<LogItem> {JSON.stringify(log)} </LogItem>)
+      }
+    })
+
+
+    return (
+      <div>
+        {logRow}
+      </div>
+    )
+  }
+}
+
 
 class Console extends Component {
   constructor() {
@@ -59,6 +95,7 @@ class Console extends Component {
           name: 'network',
         }
       ],
+      consoleLogs: [],
     }
   }
   handleMenubarItemClick(menuItemId) {
@@ -66,7 +103,39 @@ class Console extends Component {
       menubarId: menuItemId
     }))
   }
+  overrideConsole() {
+    window.console = ( nativeConsole =>{
+      const _this = this
+      return {
+        log: function(...text){
+          nativeConsole.log(...text);
+          const consoleLogs = _this.state.consoleLogs
+          _this.setState({
+            consoleLogs: consoleLogs.concat([text])
+          })
+        },
+        info: function (...text) {
+          nativeConsole.info(...text);
+        },
+        debug: function (...text) {
+          nativeConsole.log(...text);
+        },
+        warn: function (...text) {
+          nativeConsole.warn(...text);
+        },
+        error: function (...text) {
+          nativeConsole.error(...text);
+        }
+      };
+    })(window.console)
+  }
   render() {
+    let Temp = []
+    if (this.state.menubarId === 'console') {
+      this.state.consoleLogs.map( logs =>  {
+        Temp.push(<Log logs={logs}></Log>)
+      })
+    }
     return (
       <Consolebox>
         <Menubar>
@@ -82,18 +151,21 @@ class Console extends Component {
           }
         </Menubar>
         <MainContainer>
-          {
-            this.state.menubarArray.map(menuItem => {
-              return (
-                menuItem.id === this.state.menubarId
-                && <MainContainerItem>{menuItem.name}</MainContainerItem>
-              )
-            })
-          }
+          {Temp}
         </MainContainer>
         <Statusbar>123</Statusbar>
       </Consolebox>
     )
+  }
+  componentDidMount() {
+    this.overrideConsole()
+    console.log('log1')
+    console.log('log2', '123', 456)
+    console.log(1)
+    console.log({a: 1})
+    console.log([1,2,3])
+    console.log(this.state.consoleLogs)
+
   }
 }
 
