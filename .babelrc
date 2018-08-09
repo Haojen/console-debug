@@ -3,10 +3,5 @@
     "env"
   ],
   "plugins": [
-    ["transform-react-jsx", { "pragma":"h" }],
-    ["transform-react-remove-prop-types", {
-      "mode": "wrap",
-      "ignoreFilenames": ["node_modules"]
-    }]
   ]
 }

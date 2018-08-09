@@ -35,13 +35,14 @@
     "node-sass": "^4.9.2",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.21.0",
+    "vue-loader": "^15.3.0",
+    "vue-style-loader": "^4.1.1",
+    "vue-template-compiler": "^2.5.17",
     "webpack": "^4.16.4",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.5"
   },
   "dependencies": {
-    "preact": "^8.3.0",
-    "preact-compat": "^3.18.2",
-    "styled-components": "^3.4.1"
+    "vue": "^2.5.17"
   }
 }
