@@ -112,15 +112,14 @@
         <div class="console-panel" v-show="controlPanelDisplayState" :class="consoleClassState">
             <header class="top-menu-bar">
                 <nav>
+                    <button @click="onRefreshEv"><span>&#xe62c;</span></button>
+                    <button @click="onSwitchConsolePanelEv">Console</button>
+                    <button @click="onSwitchNetworkPanelEv">Network</button>
                     <div style="float: right" class="right-bar">
                         <button @click="onFullscreenEv" style="background-color: limegreen; color: #259525">&#xe7ef;</button>
                         <button @click="onCloseConsolePanelEv" style="background-color: #ff1131;color: #8a0b1c">&#xe600;</button>
                         <button @click="onMinimizeEv" style="background-color: #ffd200; color: #917800">&#xe62b;</button>
                     </div>
-                    <button @click="onRefreshEv"><span>&#xe62c;</span></button>
-                    <!--<button><span>&#xe657;</span></button>-->
-                    <button @click="onSwitchConsolePanelEv">Console</button>
-                    <button @click="onSwitchNetworkPanelEv">Network</button>
                 </nav>
             </header>
             <div class="content">
@@ -130,7 +129,7 @@
                 </div>
             </div>
             <footer class="footer-menu-bar">
-                <button class="clear-icon" @click="onClearLogEv"><span>&#xe64a;</span></button>
+                <button class="clear-icon" @click="onClearLogEv"><span>&#xe64a; </span></button>
                 <span><span style="color: red;">&#xe632; </span><span v-text="errorNumber"></span></span>
                 <span><span style="color: #ecb92b">&#xe686; </span><span v-text="warningNumber"></span></span>
                 <!--<button class="search-icon"><span>&#xe629;</span></button>-->
