@@ -1,6 +1,5 @@
 export default {
   inserted(el, binding) {
-    console.log(el, 'el')
     function resizer(obj) {
       const eventType = {
         pc: {
@@ -17,6 +16,8 @@ export default {
       }
 
       const ev = eventType['ontouchstart' in document ? 'mobile' : 'pc']
+
+      const screenHeight = window.screen.height - 30
 
       obj[ev.startDrag] = e => {
         let x = e.pageX,
@@ -36,14 +37,16 @@ export default {
         let Top = obj.offsetTop;   //获取到距离上边的距离
         //下一步判断方向距离左边的距离+元素的宽度减去自己设定的宽度，只要点击的时候大于在这个区间，他就算右边
 
-        if (firstX > Left + width - 30) {
+        const trigger = 20
+
+        if (firstX > Left + width - trigger) {
           dir = "right";
-        } else if (firstX < Left + 30) {
+        } else if (firstX < Left + trigger) {
           dir = "left";
         }
-        if (firstY > Top + height - 30) {
+        if (firstY > Top + height - trigger) {
           dir = "down";
-        } else if (firstY < Top + 30) {
+        } else if (firstY < Top + trigger) {
           dir = "top";
         }
         //判断方向结束
@@ -67,9 +70,12 @@ export default {
               obj.style["left"] = Left + (x - firstX) + "px";
               break;
             case "top":
-              document.body.style.cursor = 'ns-resize'
-              obj.style["height"] = height - (y - firstY) + "px";
-              obj.style["top"] = Top + (y - firstY) + "px";
+              const topOffset = Top + (y - firstY)
+              if (topOffset> 0 && topOffset < screenHeight) {
+                document.body.style.cursor = 'ns-resize'
+                obj.style["height"] = height - (y - firstY) + "px";
+                obj.style["top"] = topOffset + "px";
+              }
               break;
             case "down":
               document.body.style.cursor = 'ns-resize'
