@@ -1,6 +1,9 @@
 <template>
     <div class="window-widget debug" v-resize>
-        <Navigation-bar></Navigation-bar>
+        <Navigation-bar @windowClose="onWindowClose"
+                        @windowMinimize="onWindowMinimize"
+                        @windowFullscreen="onWindowFullscreen">
+        </Navigation-bar>
     </div>
 </template>
 
@@ -10,6 +13,17 @@
     name: "window",
     components: {
       NavigationBar
+    },
+    methods: {
+      onWindowClose() {
+        console.log('c')
+      },
+      onWindowMinimize() {
+        console.log('m')
+      },
+      onWindowFullscreen() {
+        console.log('f')
+      }
     }
   }
 </script>

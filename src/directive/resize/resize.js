@@ -18,14 +18,20 @@ export default {
       const ev = eventType['ontouchstart' in document ? 'mobile' : 'pc']
 
       const screenHeight = window.screen.height - 30
-
+      let startDragFirstX = null,
+          startDragFirstY = null
       obj[ev.startDrag] = e => {
         let x = e.pageX,
-          y = e.pageY;
+            y = e.pageY;
 
         if (e.touches) {
           x = e.touches[0].pageX
           y = e.touches[0].pageY
+        }
+
+        if (startDragFirstX === null && startDragFirstY === null) {
+          startDragFirstX = parseInt(x)
+          startDragFirstY = parseInt(y)
         }
 
         let dir = '';  //设置好方向
@@ -37,7 +43,7 @@ export default {
         let Top = obj.offsetTop;   //获取到距离上边的距离
         //下一步判断方向距离左边的距离+元素的宽度减去自己设定的宽度，只要点击的时候大于在这个区间，他就算右边
 
-        const trigger = 20
+        const trigger = 30
 
         if (firstX > Left + width - trigger) {
           dir = "right";
@@ -45,53 +51,64 @@ export default {
           dir = "left";
         }
         if (firstY > Top + height - trigger) {
-          dir = "down";
+          // dir = "down";
         } else if (firstY < Top + trigger) {
           dir = "top";
         }
-        //判断方向结束
+
         document[ev.startMove] = e => {
-          let x = e.pageX,
-              y = e.pageY;
+          let x = parseInt(e.pageX),
+              y = parseInt(e.pageY);
 
           if (e.touches) {
-            x = e.touches[0].pageX
-            y = e.touches[0].pageY
+            x = parseInt(e.touches[0].pageX)
+            y = parseInt(e.touches[0].pageY)
+          }
+
+          const triggerX = startDragFirstX - x > 1 || x - startDragFirstX > 1,
+                triggerY = startDragFirstY - y > 1 || y - startDragFirstY > 1
+
+          if(!triggerY || !triggerX) {
+            return
           }
 
           switch (dir) {
-            case "right":
-              document.body.style.cursor = 'ew-resize'
-              obj.style["width"] = width + (x - firstX) + "px";
-              break;
-            case "left":
-              document.body.style.cursor = 'ew-resize'
-              obj.style["width"] = width - (x - firstX) + "px";
-              obj.style["left"] = Left + (x - firstX) + "px";
-              break;
-            case "top":
-              const topOffset = Top + (y - firstY)
-              if (topOffset> 0 && topOffset < screenHeight) {
+              case "right":
+                document.body.style.cursor = 'ew-resize'
+                obj.style["width"] = width + (x - firstX) + "px";
+                break;
+              case "left":
+                document.body.style.cursor = 'ew-resize'
+                obj.style["width"] = width - (x - firstX) + "px";
+                obj.style["left"] = Left + (x - firstX) + "px";
+                break;
+              case "top":
+                const topOffset = Top + (y - firstY)
+                if (topOffset> 0 && topOffset < screenHeight) {
+                  document.body.style.cursor = 'ns-resize'
+                  obj.style["height"] = height - (y - firstY) + "px";
+                  obj.style["top"] = topOffset + "px";
+                }
+                break;
+              case "down":
                 document.body.style.cursor = 'ns-resize'
-                obj.style["height"] = height - (y - firstY) + "px";
-                obj.style["top"] = topOffset + "px";
-              }
-              break;
-            case "down":
-              document.body.style.cursor = 'ns-resize'
-              obj.style["height"] = height + (y - firstY) + "px";
-              break;
-          }
+                obj.style["height"] = height + (y - firstY) + "px";
+                break;
+            }
         }
+
         obj[ev.endDrag] = () => {
-          document.onmousemove = null
+          startDragFirstX = null
+          startDragFirstY = null
+          document[ev.startMove] = null
           document.body.style.cursor = 'default'
         }
         document.onmouseleave = () => {
+          startDragFirstX = null
+          startDragFirstY = null
           document.onmousemove = null
           document.body.style.cursor = 'default'
         }
-        return false;
       }
     }
     resizer(el)

@@ -22,13 +22,14 @@
     name: "navigation-bar",
     methods: {
       onCloseEv(){
-        this.$emit('close')
+        console.log('cx')
+        this.$emit('windowClose')
       },
       onMinimizeEv(){
-        this.$emit('minimize')
+        this.$emit('windowMinimize')
       },
       onFullScreenEv(){
-        this.$emit('fullscreen')
+        this.$emit('windowFullscreen')
       },
     }
   }
