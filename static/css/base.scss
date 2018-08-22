@@ -1,0 +1,20 @@
+html,
+body {
+  margin: 0;
+}
+
+.debug {
+  border: 1px solid red;
+}
+
+button {
+  display: inline-block;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: none;
+}
+
+* {
+  box-sizing: border-box;
+}

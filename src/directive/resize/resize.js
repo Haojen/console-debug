@@ -1,5 +1,6 @@
 export default {
   inserted(el, binding) {
+    console.log(el, 'el')
     function resizer(obj) {
       obj.onmousedown = e => {
         let dir = '';  //设置好方向
