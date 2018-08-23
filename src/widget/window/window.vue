@@ -1,34 +1,48 @@
 <template>
     <div class="window-widget use-flex is-column" :class="show && 'show'" v-resize>
         <header>
-            <Navigation-bar :activeNavbar="defaultActiveNavbar"
+            <Header-bar :activeBar="currentPanel"
                             @windowClose="onWindowClose"
                             @windowMinimize="onWindowMinimize"
                             @windowFullscreen="onWindowFullscreen"
                             @activeNavbar="onActiveNavbarEv">
-            </Navigation-bar>
+            </Header-bar>
         </header>
         <section class="flex-1">
-            <Log></Log>
+            <Log v-show="currentPanel === 'log'" @logAmount="onLogAmountEv"></Log>
+            <Network v-show="currentPanel === 'network'"></Network>
         </section>
+        <footer>
+            <Log-bar v-show="currentPanel === 'log'"
+                     :logAmount="logAmount"
+                     @clearLog="onClearLogsEv"></Log-bar>
+        </footer>
     </div>
 </template>
 
 <script>
-  import NavigationBar from '../navigation-bar/navigation-bar'
   import Log from '../log/log'
+  import LogBar from '../footbar/logbar'
+  import Network from '../network/network'
+  import HeaderBar from '../navigation-bar/navigation-bar'
   export default {
     name: "window",
     components: {
-      NavigationBar,
-      Log
+      Log,
+      LogBar,
+      Network,
+      HeaderBar
     },
     props: {
       show: Boolean,
     },
     data() {
       return {
-        defaultActiveNavbar: 'network'
+        currentPanel: 'log',
+        logAmount: {
+          warn: 0,
+          error: 0,
+        },
       }
     },
     methods: {
@@ -42,7 +56,13 @@
         console.log('f')
       },
       onActiveNavbarEv(navbar) {
-        console.debug(navbar,'navbar')
+        this.currentPanel = navbar
+      },
+      onLogAmountEv(amount) {
+        this.logAmount = amount
+      },
+      onClearLogsEv() {
+        this.$bus.emit.clearLogs()
       }
     }
   }
@@ -75,7 +95,6 @@
 
     @media screen and (max-width: 480px){
         .window-widget {
-
         }
     }
 

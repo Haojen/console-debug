@@ -17,17 +17,17 @@
 </template>
 
 <script>
-  import NavConfig from './nav.config'
+  import NavConfig from './feature.config'
   export default {
     name: "navigation-bar",
     data() {
       return {
         Features: NavConfig,
-        activeFeature: this.activeNavbar
+        activeFeature: this.activeBar
       }
     },
     props: {
-      activeNavbar: {
+      activeBar: {
         type: String,
         default: () => 'log'
       }
