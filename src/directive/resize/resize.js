@@ -43,7 +43,7 @@ export default {
         let Top = obj.offsetTop;   //获取到距离上边的距离
         //下一步判断方向距离左边的距离+元素的宽度减去自己设定的宽度，只要点击的时候大于在这个区间，他就算右边
 
-        const trigger = 30
+        const trigger = 25
 
         if (firstX > Left + width - trigger) {
           dir = "right";

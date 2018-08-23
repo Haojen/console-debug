@@ -1,7 +1,7 @@
 <template>
     <div class="log-page debug">
         <Trigger @trigger="onToggleConsoleEv"></Trigger>
-        <Windows></Windows>
+        <Windows :show.sync="showWindow"></Windows>
     </div>
 </template>
 
@@ -15,9 +15,15 @@
       Trigger,
       Windows
     },
+    data() {
+      return {
+        showWindow: true,
+      }
+    },
     methods: {
       onToggleConsoleEv() {
         console.log('toggle')
+        this.showWindow = !this.showWindow
       },
     }
   }

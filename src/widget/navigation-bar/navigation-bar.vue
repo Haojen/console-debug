@@ -1,10 +1,9 @@
 <template>
     <div class="navigation-bar-widget use-flex is-center is-justify-between">
         <div class="flex-1 left-side use-flex is-align-center">
-            <button class="active">Log</button>
-            <button>Network</button>
-            <button>Storage</button>
-            <button>Performance</button>
+            <button v-for="feature in Features"
+                    :class="activeFeature === feature.id && 'active'"
+                    v-text="feature.name" @click="onSwitchFeatureEv(feature.id)"></button>
         </div>
         <div class="right-side use-flex is-center" style="margin-right: 10px;">
             <button class="control use-flex is-center iconfont icon-youce wm-1"></button>
@@ -18,11 +17,23 @@
 </template>
 
 <script>
+  import NavConfig from './nav.config'
   export default {
     name: "navigation-bar",
+    data() {
+      return {
+        Features: NavConfig,
+        activeFeature: this.activeNavbar
+      }
+    },
+    props: {
+      activeNavbar: {
+        type: String,
+        default: () => 'log'
+      }
+    },
     methods: {
       onCloseEv(){
-        console.log('cx')
         this.$emit('windowClose')
       },
       onMinimizeEv(){
@@ -31,6 +42,11 @@
       onFullScreenEv(){
         this.$emit('windowFullscreen')
       },
+      onSwitchFeatureEv(feature) {
+        console.log(feature)
+        this.activeFeature = feature
+        this.$emit('activeNavbar', feature)
+      }
     }
   }
 </script>
@@ -39,19 +55,23 @@
     .navigation-bar-widget {
         height: 30px;
         width: 100%;
-        background-color: rgba(255,255,255, .12);
-        border-bottom: 1px solid rgba(255, 255, 255,.1);
+        user-select: none;
+        background-color: rgba(255,255,255, .16);
 
         button {
             color: #fff;
         }
 
         .left-side {
+
             height: 100%;
             button {
                 height: 100%;
+                color: #c4c4c4;
+                font-size: 14px;
             }
             .active {
+                color: #fff;
                 background-color: black;
             }
         }

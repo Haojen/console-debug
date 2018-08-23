@@ -25,5 +25,9 @@
         height: 50px;
         border-radius: 50%;
         background-color: orange;
+        button {
+            width: 100%;
+            height: 100%;
+        }
     }
 </style>
