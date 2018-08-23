@@ -1,5 +1,5 @@
 <template>
-    <div class="window-widget use-flex is-column" :class="show && 'show'" v-resize>
+    <div ref="windows" class="window-widget use-flex is-column" :class="{show}" v-resize>
         <header>
             <Header-bar :activeBar="currentPanel"
                             @windowClose="onWindowClose"
@@ -50,10 +50,10 @@
         this.$emit('update:show', false)
       },
       onWindowMinimize() {
-        console.log('m')
+        this.$refs.windows.classList.toggle('window-minimize')
       },
       onWindowFullscreen() {
-        console.log('f')
+        this.$refs.windows.classList.toggle('window-full-screen')
       },
       onActiveNavbarEv(navbar) {
         this.currentPanel = navbar
@@ -77,12 +77,25 @@
         height: 45vh;
         color: #ffffff;
         transform: translateY(100vh);
-        transition: transform .68s;
+        transition: translateY, width, height, .38s;
         background-color: rgba(0,0,0,.95);
         -webkit-overflow-scrolling: touch;
 
         &.show {
+            will-change: auto;
             transform: translateY(0);
+        }
+
+        &.window-minimize {
+            top: calc(100vh - 30px)!important;
+        }
+
+        &.window-full-screen {
+            will-change: auto;
+            top: 0!important;
+            left: 0!important;
+            width: 100vw!important;
+            height: 100vh!important;
         }
 
         font-size: 16px;

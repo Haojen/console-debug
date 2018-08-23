@@ -98,7 +98,7 @@
       setInterval(() => {
         console.log('文本', {bar: {child: 'xxxxxxx', barNum: 666}, cool: 'haha', numbers: 1}, new Date())
         console.warn('xxxx warn xxxx')
-      }, 5000)
+      }, 15000)
     }
   }
 </script>
