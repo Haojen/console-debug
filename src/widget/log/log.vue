@@ -90,15 +90,15 @@
         }
         this.$emit('logAmount', this.amount)
       })
-      console.log('begin', 12312)
-      console.info(this.logList)
-      console.debug(this.logList)
-      console.warn(this.logList)
-      console.error(this.logList)
-      setInterval(() => {
-        console.log('文本', {bar: {child: 'xxxxxxx', barNum: 666}, cool: 'haha', numbers: 1}, new Date())
-        console.warn('xxxx warn xxxx')
-      }, 15000)
+      // console.log('begin', 12312)
+      // console.info(this.logList)
+      // console.debug(this.logList)
+      // console.warn(this.logList)
+      // console.error(this.logList)
+      // setInterval(() => {
+      //   // console.log('文本', {bar: {child: 'xxxxxxx', barNum: 666}, cool: 'haha', numbers: 1}, new Date())
+      //   // console.warn('xxxx warn xxxx')
+      // }, 15000)
     }
   }
 </script>

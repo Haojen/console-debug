@@ -38,7 +38,7 @@
     },
     data() {
       return {
-        currentPanel: 'log',
+        currentPanel: 'network',
         logAmount: {
           warn: 0,
           error: 0,
