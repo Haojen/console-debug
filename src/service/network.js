@@ -14,7 +14,6 @@ export default class overrideAJAX {
           url = args[1],
           id = that.getUniqueID(),
           timer = null
-
       // may be used by other functions
       XMLReq._url = url;
       XMLReq._requestID = id;
@@ -32,35 +31,49 @@ export default class overrideAJAX {
         }
         item.responseType = XMLReq.responseType;
 
-        if ((XMLReq.readyState === 0 || XMLReq.readyState === 1 ) && !item.startTime) {
-            item.startTime = (+new Date());
-        } else if (XMLReq.readyState === 2) {
-          // HEADERS_RECEIVED
-          item.header = {};
-          let header = XMLReq.getAllResponseHeaders() || '',
-            headerArr = header.split("\n");
-          // extract plain text to key-value format
-          for (let i=0; i<headerArr.length; i++) {
-            let line = headerArr[i];
-            if (!line) { continue; }
-            let arr = line.split(': ');
-            let key = arr[0],
-              value = arr.slice(1).join(': ');
-            item.header[key] = value;
-          }
-        } else if (XMLReq.readyState === 3) {
-          // LOADING
-        } else if (XMLReq.readyState === 4) {
-          // DONE
-          clearInterval(timer);
-          item.endTime = +new Date(),
+        switch (XMLReq.readyState) {
+          case 0:
+            // UNSENT
+            item.startTime = new Date();
+            console.log('UNSENT')
+            break;
+          case 1:
+            // OPENED
+            item.startTime = new Date();
+            console.log('OPENED', item.startTime)
+            break;
+          case 2:
+            // HEADERS_RECEIVED
+            item.header = {}
+            let header = XMLReq.getAllResponseHeaders() || '',
+              headerArr = header.split("\n");
+
+            // extract plain text to key-value format
+            for (let i=0; i<headerArr.length; i++) {
+              let line = headerArr[i];
+              if (!line) { continue; }
+              let arr = line.split(': ');
+              let key = arr[0],
+                value = arr.slice(1).join(': ');
+              item.header[key] = value;
+            }
+            break;
+          case 3:
+            // LOADING
+            break;
+          case 4:
+            item.endTime = new Date()
             item.costTime = item.endTime - (item.startTime || item.endTime);
-          item.response = XMLReq.response;
-        } else {
-          clearInterval(timer);
+            item.response = XMLReq.response;
+            clearInterval(timer);
+            break;
+          default:
+            clearInterval(timer);
         }
 
         that.reqList[id] = item
+        // console.log(that.reqList[id])
+        that.emitRequestChunkInfo(that.reqList)
         return _onreadystatechange.apply(XMLReq, arguments);
       };
       XMLReq.onreadystatechange = onreadystatechange;
@@ -112,7 +125,7 @@ export default class overrideAJAX {
 
       that.reqList[XMLReq._requestID] = Object.assign(that.reqList[XMLReq._requestID], item)
 
-      that.emitRequestChunkInfo(XMLReq._requestID, item);
+      // that.emitRequestChunkInfo(XM, item);
 
       return that._send.apply(XMLReq, args);
     };
@@ -131,12 +144,10 @@ export default class overrideAJAX {
     return id;
   }
 
-  emitRequestChunkInfo(chunkId, chunkInfo) {
+  emitRequestChunkInfo(chunkInfo) {
     // console.log(chunkInfo, 'emitRequestChunkInfo', this.reqList)
-    const getEntries = window.performance.getEntries()
+    console.log(chunkInfo, 'emitRequestChunkInfo')
 
-    console.log(chunkInfo, getEntries, 'chunkInfo=========')
-
-    // this.callback && this.callback(chunkInfo, requestEntries)
+    this.callback && this.callback(chunkInfo, requestEntries)
   }
 }

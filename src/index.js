@@ -1,15 +1,14 @@
-import Network from './service/network'
+import xhook from 'xhook'
 import Vue from 'vue'
 // import App from './App'
 import App from './index.vue'
-import '../static/css/index.scss'
 import bus from './service/bus'
 
+import '../static/css/index.scss'
 import './directive/index'
 
-new Network()
-
 Vue.prototype.$bus = bus
+Vue.prototype.$xhook = xhook
 
 new Vue({
   el: '#app',

@@ -285,7 +285,7 @@
       }
     },
     created() {
-      this.overrideConsole()
+      // this.overrideConsole()
     },
     mounted() {
       // 多点触控
@@ -300,12 +300,12 @@
       // })
       this.controlPanelDisplayState = true
       const _this = this
-      setInterval(() => {
-          console.log('文本', {foo: _this.counter, bar: {child: 'xxxxxxx', barNum: 666}, cool: 'haha', numbers: 1}, _this.counter)
-          this.formatLogText(this.temp)
-          _this.counter += 1
-          console.debug('hahahah')
-      }, 10000)
+      // setInterval(() => {
+      //     console.log('文本', {foo: _this.counter, bar: {child: 'xxxxxxx', barNum: 666}, cool: 'haha', numbers: 1}, _this.counter)
+      //     this.formatLogText(this.temp)
+      //     _this.counter += 1
+      //     console.debug('hahahah')
+      // }, 10000)
     }
   }
 </script>
