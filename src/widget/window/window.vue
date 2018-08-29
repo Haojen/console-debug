@@ -11,6 +11,8 @@
         <section class="flex-1">
             <Log v-show="currentPanel === 'log'" @logAmount="onLogAmountEv"></Log>
             <Network v-show="currentPanel === 'network'"></Network>
+            <Timing v-show="currentPanel === 'timing'"></Timing>
+            <Performance v-show="currentPanel === 'Performance'"></Performance>
         </section>
         <footer>
             <Log-bar v-show="currentPanel === 'log'"
@@ -22,23 +24,27 @@
 
 <script>
   import Log from '../log/log'
+  import Timing from '../timing/timing'
   import LogBar from '../footbar/logbar'
   import Network from '../network/network'
+  import Performance from '../performance/performance'
   import HeaderBar from '../navigation-bar/navigation-bar'
   export default {
     name: "window",
     components: {
       Log,
       LogBar,
+      Timing,
       Network,
-      HeaderBar
+      HeaderBar,
+      Performance
     },
     props: {
       show: Boolean,
     },
     data() {
       return {
-        currentPanel: 'network',
+        currentPanel: 'performance',
         logAmount: {
           warn: 0,
           error: 0,

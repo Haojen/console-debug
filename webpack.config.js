@@ -1,6 +1,13 @@
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 module.exports = {
+  entry: {
+    app: './src/index.js'
+  },
+  output: {
+    filename: '[name].[hash:7].js',
+    path: __dirname + '/dist'
+  },
   module: {
     rules: [
       {

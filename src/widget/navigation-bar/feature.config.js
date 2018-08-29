@@ -5,12 +5,12 @@ export default [
     desc: '',
     statusbar: true,
   },
-  {
-    id: 'element',
-    name: 'Element',
-    desc: '',
-    statusbar: false
-  },
+  // {
+  //   id: 'timing',
+  //   name: 'Timing',
+  //   desc: '',
+  //   statusbar: false
+  // },
   {
     id: 'network',
     name: 'Network',
