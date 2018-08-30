@@ -12,7 +12,7 @@
             <Log v-show="currentPanel === 'log'" @logAmount="onLogAmountEv"></Log>
             <Network v-show="currentPanel === 'network'"></Network>
             <Timing v-show="currentPanel === 'timing'"></Timing>
-            <Performance v-show="currentPanel === 'Performance'"></Performance>
+            <Performance v-show="currentPanel === 'performance'"></Performance>
         </section>
         <footer>
             <Log-bar v-show="currentPanel === 'log'"

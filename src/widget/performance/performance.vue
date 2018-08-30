@@ -1,6 +1,8 @@
 <template>
     <div class="performance-widget">
-        <FPS></FPS>
+        <div style="height: 200px">
+            <FPS></FPS>
+        </div>
     </div>
 </template>
 
