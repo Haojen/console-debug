@@ -17,16 +17,16 @@ export default [
     desc: '',
     statusbar: false,
   },
-  {
-    id: 'storage',
-    name: 'Storage',
-    desc: '',
-    statusbar: false,
-  },
-  {
-    id: 'performance',
-    name: 'Performance',
-    desc: '',
-    statusbar: false
-  },
+  // {
+  //   id: 'storage',
+  //   name: 'Storage',
+  //   desc: '',
+  //   statusbar: false,
+  // },
+  // {
+  //   id: 'performance',
+  //   name: 'Performance',
+  //   desc: '',
+  //   statusbar: false
+  // },
 ]

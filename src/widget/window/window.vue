@@ -12,6 +12,7 @@
             <Log v-show="currentPanel === 'log'" @logAmount="onLogAmountEv"></Log>
             <Network v-show="currentPanel === 'network'"></Network>
             <Timing v-show="currentPanel === 'timing'"></Timing>
+            <Storage v-show="currentPanel === 'storage'"></Storage>
             <Performance v-show="currentPanel === 'performance'"></Performance>
         </section>
         <footer>
@@ -27,6 +28,7 @@
   import Timing from '../timing/timing'
   import LogBar from '../footbar/logbar'
   import Network from '../network/network'
+  import Storage from '../storage/storage'
   import Performance from '../performance/performance'
   import HeaderBar from '../navigation-bar/navigation-bar'
   export default {
@@ -36,6 +38,7 @@
       LogBar,
       Timing,
       Network,
+      Storage,
       HeaderBar,
       Performance
     },
@@ -44,7 +47,7 @@
     },
     data() {
       return {
-        currentPanel: 'performance',
+        currentPanel: 'storage',
         logAmount: {
           warn: 0,
           error: 0,

@@ -6,9 +6,9 @@
                     v-text="feature.name" @click="onSwitchFeatureEv(feature.id)"></button>
         </div>
         <div class="right-side use-flex is-center" style="margin-right: 10px;">
-            <button class="control use-flex is-center iconfont icon-youce wm-1"></button>
-            <button class="control use-flex is-center iconfont icon-youce wm-2"></button>
-            <button class="control use-flex is-center iconfont icon-youce wm-3"></button>
+            <!--<button class="control use-flex is-center iconfont icon-youce wm-1"></button>-->
+            <!--<button class="control use-flex is-center iconfont icon-youce wm-2"></button>-->
+            <!--<button class="control use-flex is-center iconfont icon-youce wm-3"></button>-->
             <button class="control c-1" @click="onFullScreenEv"></button>
             <button class="control c-2" @click="onMinimizeEv"></button>
             <button class="control c-3" @click="onCloseEv"></button>
