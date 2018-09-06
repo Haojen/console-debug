@@ -10,8 +10,12 @@ import './directive/index'
 Vue.prototype.$bus = bus
 Vue.prototype.$xhook = xhook
 
-new Vue({
-  el: '#app',
-  components: {App},
-  template: '<App/>'
-})
+export default {
+  init(id) {
+    new Vue({
+      el: id,
+      components: {App},
+      template: '<App/>'
+    })
+  }
+}
