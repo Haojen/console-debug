@@ -7,9 +7,16 @@
 <script>
   export default {
     name: "trigger",
+    data() {
+      return {
+        state: false
+      }
+    },
     methods: {
       onTriggerEv() {
-        this.$emit('trigger')
+        this.$bus.emit.showConsole({
+          state: this.state = !this.state
+        })
       }
     }
   }
@@ -17,10 +24,9 @@
 
 <style scoped lang="scss">
     .trigger-widget {
-        border: none;
-        outline: none;
-        background: none;
-
+        position: fixed;
+        right: 0;
+        bottom: 200px;
         width: 50px;
         height: 50px;
         border-radius: 50%;
