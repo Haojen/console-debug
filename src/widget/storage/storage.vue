@@ -29,10 +29,10 @@
     },
     mounted() {
 
-      new Chart(this.$refs.storageCanvas, {
-        type: 'pie',
-        data: 10
-      })
+      // new Chart(this.$refs.storageCanvas, {
+      //   type: 'pie',
+      //   data: 10
+      // })
     }
   }
 </script>

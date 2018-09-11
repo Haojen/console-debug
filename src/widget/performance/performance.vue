@@ -1,16 +1,16 @@
 <template>
     <div class="performance-widget">
         <div style="height: 200px">
-            <FPS></FPS>
+            <!--<FPS></FPS>-->
         </div>
     </div>
 </template>
 
 <script>
-  import FPS from '../fps/fps'
+  // import FPS from '../fps/fps'
   export default {
     name: "performance",
-    components: {FPS}
+    // components: {FPS}
   }
 </script>
 

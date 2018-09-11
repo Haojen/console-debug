@@ -5,8 +5,10 @@ module.exports = {
     app: './src/index.js'
   },
   output: {
-    filename: '[name].[hash:7].js',
-    path: __dirname + '/dist'
+    // filename: '[name].[hash:7].js',
+    filename: '[name].js',
+    path: __dirname + '/dist',
+    libraryTarget: "commonjs2"
   },
   module: {
     rules: [
