@@ -8,7 +8,7 @@ module.exports = {
     // filename: '[name].[hash:7].js',
     filename: '[name].js',
     path: __dirname + '/dist',
-    libraryTarget: "commonjs2"
+    // libraryTarget: "commonjs2"
   },
   module: {
     rules: [

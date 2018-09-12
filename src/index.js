@@ -10,7 +10,19 @@ import './directive/index'
 Vue.prototype.$bus = bus
 Vue.prototype.$xhook = xhook
 
-export default class Kashmir {
+
+Vue.prototype.$config = {
+  theme: 'default',
+  trigger: 'default',
+}
+
+new Vue({
+  el: '#app',
+  components: {App},
+  template: '<App/>',
+})
+
+export default class {
   constructor({el, trigger, theme}) {
 
     Vue.prototype.$config = {

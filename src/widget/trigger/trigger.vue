@@ -1,10 +1,11 @@
 <template>
     <div class="trigger-widget">
-        <button @click="onTriggerEv"></button>
+        <Halo @click.native="onTriggerEv"></Halo>
     </div>
 </template>
 
 <script>
+  import Halo from '../../service/halo/halo'
   export default {
     name: "trigger",
     data() {
@@ -12,6 +13,7 @@
         state: false
       }
     },
+    components: {Halo},
     methods: {
       onTriggerEv() {
         this.$bus.emit.showConsole({
@@ -24,16 +26,6 @@
 
 <style scoped lang="scss">
     .trigger-widget {
-        position: fixed;
-        right: 0;
-        bottom: 200px;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background-color: orange;
-        button {
-            width: 100%;
-            height: 100%;
-        }
+
     }
 </style>
