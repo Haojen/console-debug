@@ -10,6 +10,9 @@ module.exports = {
     path: __dirname + '/dist',
     // libraryTarget: "commonjs2"
   },
+  devServer: {
+    host: '0.0.0.0'
+  },
   module: {
     rules: [
       {
