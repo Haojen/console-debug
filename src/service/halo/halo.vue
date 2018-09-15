@@ -48,30 +48,35 @@
 
         &.size-small {}
         &.size-normal {
-            width: 50px;
-            height: 50px;
+            width: 48px;
+            height: 48px;
         }
         &.size-large {}
 
         &.theme-default {
-            $color1: rgb(224,224,224);
-            $color2: rgb(238,238,238);
-            $color3: rgb(245,245,245);
-            /*border: 10px solid red;*/
+            $spacing: 7px;
+
+            $color1: rgb(97,97,97);
+            $color2: rgb(117,117,117);
+            $color3: rgb(158,158,158);
+
+            opacity: 0.7;
             background: $color1;
-            box-shadow: inset 0 0 0 7px $color2, 0 0 0 6px $color3;
+            border: $spacing solid $color2;
+            box-shadow: 0 0 0 $spacing $color3;
 
             &.active {
-                $color1: rgb(158,158,158);
-                $color2: rgb(189,189,189);
-                $color3: rgb(224,224,224);
 
                 width: 55px;
                 height: 55px;
-                transition: background-color .8s, box-shadow .8s, width .8s, height .8s;
 
+                transition: background-color .8s,
+                box-shadow .8s, width .8s, height .8s, opacity 0.4s;
+
+                opacity: 1;
                 background: $color1;
-                box-shadow: inset 0 0 0 7px $color2, 0 0 0 6px $color3;
+                border: $spacing solid $color2;
+                box-shadow: 0 0 0 $spacing $color3;
             }
 
             &.inactive {
@@ -79,7 +84,7 @@
                             box-shadow .8s,
                             width .8s,
                             height .8s,
-                            transform .4s;
+                            transform .4s, opacity 0.8s;
             }
         }
     }

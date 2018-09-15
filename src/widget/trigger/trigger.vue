@@ -1,6 +1,6 @@
 <template>
     <div class="trigger-widget">
-        <Halo @click.native="onTriggerEv"></Halo>
+        <Halo @click.native="onTriggerEv" @dbclick.native="ondblClick"></Halo>
     </div>
 </template>
 
@@ -19,13 +19,10 @@
         this.$bus.emit.showConsole({
           state: this.state = !this.state
         })
+      },
+      ondblClick() {
+        console.log('dbl click')
       }
     }
   }
 </script>
-
-<style scoped lang="scss">
-    .trigger-widget {
-
-    }
-</style>

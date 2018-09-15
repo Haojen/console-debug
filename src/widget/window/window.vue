@@ -1,32 +1,25 @@
 <template>
-    <div ref="windows" class="window-widget use-flex is-column" :class="{show}" v-resize>
-        <header>
+    <div ref="windows" class="window-widget use-flex is-column" :class="show && 'show'" v-resize>
+        <header class="is-relative">
             <Header-bar :activeBar="currentPanel"
                             @windowClose="onWindowClose"
-                            @windowMinimize="onWindowMinimize"
                             @windowFullscreen="onWindowFullscreen"
                             @activeNavbar="onActiveNavbarEv">
             </Header-bar>
         </header>
-        <section class="flex-1">
-            <Log v-show="currentPanel === 'log'" @logAmount="onLogAmountEv"></Log>
+        <section class="flex-1 is-relative">
+            <Log v-show="currentPanel === 'log'"></Log>
             <Network v-show="currentPanel === 'network'"></Network>
             <Timing v-show="currentPanel === 'timing'"></Timing>
             <Storage v-show="currentPanel === 'storage'"></Storage>
             <Performance v-show="currentPanel === 'performance'"></Performance>
         </section>
-        <footer>
-            <Log-bar v-show="currentPanel === 'log'"
-                     :logAmount="logAmount"
-                     @clearLog="onClearLogsEv"></Log-bar>
-        </footer>
     </div>
 </template>
 
 <script>
   import Log from '../log/log'
   import Timing from '../timing/timing'
-  import LogBar from '../footbar/logbar'
   import Network from '../network/network'
   import Storage from '../storage/storage'
   import Performance from '../performance/performance'
@@ -35,31 +28,21 @@
     name: "window",
     components: {
       Log,
-      LogBar,
       Timing,
       Network,
       Storage,
       HeaderBar,
       Performance
     },
-    props: {
-      show: Boolean,
-    },
     data() {
       return {
-        currentPanel: 'storage',
-        logAmount: {
-          warn: 0,
-          error: 0,
-        },
+        show: true,
+        currentPanel: 'log',
       }
     },
     methods: {
       onWindowClose() {
-        this.$emit('update:show', false)
-      },
-      onWindowMinimize() {
-        this.$refs.windows.classList.toggle('window-minimize')
+        this.show = false
       },
       onWindowFullscreen() {
         this.$refs.windows.classList.toggle('window-full-screen')
@@ -67,12 +50,9 @@
       onActiveNavbarEv(navbar) {
         this.currentPanel = navbar
       },
-      onLogAmountEv(amount) {
-        this.logAmount = amount
-      },
-      onClearLogsEv() {
-        this.$bus.emit.clearLogs()
-      }
+    },
+    created() {
+      this.$bus.on.showConsole( () => this.show = !this.show)
     }
   }
 </script>
@@ -80,23 +60,22 @@
 <style lang="scss" scoped>
     .window-widget {
         position: fixed;
-        top: 55vh;
         left: 0;
+        top: 55vh;
+        z-index: 1;
         width: 100vw;
         height: 45vh;
+
         color: #ffffff;
+        font-size: 16px;
         transform: translateY(100vh);
-        transition: translateY, width, height, .38s;
-        background-color: rgba(0,0,0,.95);
+        background-color: rgba(0,0,0,.9);
         -webkit-overflow-scrolling: touch;
+        font-family: Consolas, Lucida Console, monospace;
 
         &.show {
             will-change: auto;
             transform: translateY(0);
-        }
-
-        &.window-minimize {
-            top: calc(100vh - 30px)!important;
         }
 
         &.window-full-screen {
@@ -105,12 +84,14 @@
             left: 0!important;
             width: 100vw!important;
             height: 100vh!important;
+            transition:width, height, .38s;
         }
 
-        font-size: 16px;
-        font-family: Consolas, Lucida Console, monospace;
-
+        > header {
+            z-index: 1;
+        }
         > section {
+            z-index: 1;
             overflow: auto;
         }
     }

@@ -1,8 +1,8 @@
 <template>
-    <div id="__KASHMIR">
+    <div>
         <!--\Kashmir-->
+        <Windows></Windows>
         <component :is="trigger"></component>
-        <Windows :show.sync="showWindow"></Windows>
     </div>
 </template>
 
@@ -19,18 +19,12 @@
     data() {
       return {
         trigger: null,
-        showWindow: false,
       }
     },
     mounted() {
       const {trigger} = this.$config
 
       this.trigger = trigger + 'Trigger'
-      console.log(this.trigger, 'trigger')
-      this.$bus.on.showConsole( ({state}) => {
-        this.showWindow = state
-        console.log('get show console command', state)
-      })
     }
   }
 </script>

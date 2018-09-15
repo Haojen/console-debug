@@ -17,7 +17,7 @@ Vue.prototype.$config = {
 }
 
 new Vue({
-  el: '#app',
+  el: '#__DEBUG',
   components: {App},
   template: '<App/>',
 })

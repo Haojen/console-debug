@@ -58,7 +58,7 @@
         let ret = url.split('/')
 
         if (ret[ret.length-1].indexOf('?') > -1){
-          ret = ret.split('?')[0].trim
+          ret = ret[ret.length-1].split('?')[0].trim
         }else {
           ret = ret[ret.length-1]
         }
