@@ -67,7 +67,6 @@
             }
 
             else {
-              item.id = ''
               item.value = '(...)'
               item._value = obj[key]
             }
@@ -88,6 +87,7 @@
             if (typeof item === 'object') {
               // singleLog.data = JSON.stringify(item, null, 4)
               singleLog.data = _this.formatObj(item)
+              // singleLog.data = Logline(item)
             }
 
             else {

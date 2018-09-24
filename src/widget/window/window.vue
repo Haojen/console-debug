@@ -9,7 +9,7 @@
         </header>
         <section class="flex-1 is-relative">
             <Log v-show="currentPanel === 'log'"></Log>
-            <Network v-show="currentPanel === 'network'"></Network>
+            <!--<Network v-show="currentPanel === 'network'"></Network>-->
             <Timing v-show="currentPanel === 'timing'"></Timing>
             <Storage v-show="currentPanel === 'storage'"></Storage>
             <Performance v-show="currentPanel === 'performance'"></Performance>
@@ -36,7 +36,7 @@
     },
     data() {
       return {
-        show: true,
+        show: false,
         currentPanel: 'log',
       }
     },
